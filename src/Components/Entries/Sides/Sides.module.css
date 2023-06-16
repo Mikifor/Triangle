@@ -1,0 +1,10 @@
+.Inputs {
+    text-align: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+
+.degreeInput {
+    width: 4em;
+}

@@ -1,0 +1,23 @@
+.Inputs {
+    text-align: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.Sides {
+    text-align: center;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1 fr 1fr 1fr;
+}
+
+.Angles {
+    text-align: center;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1 fr 1fr 1fr;
+}
+
+.degreeInput {
+    width: 4em;
+}
