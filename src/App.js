@@ -10,7 +10,6 @@ const App = (props) => {
   return (
 
     <div className="App">
-      <Sidebar />
       <div className="app-content">
         <Entries store={props.store}/>
         <Calculations />

@@ -41,7 +41,7 @@ let store = {
     },
 
     mainButton() {
-        if (this.checkboxCounter() === 3) { this.counts() } else { alert("No") }
+        if (this.checkboxCounter() === 3) { this.counts() } else { alert("Выберите три элемента треугольника для расчётов") }
     },
 
     checkboxCounter(props) {
