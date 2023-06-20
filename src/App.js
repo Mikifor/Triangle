@@ -11,7 +11,7 @@ const App = (props) => {
     <div className="App">
       <div className="app-content">
         <Entries store={props.store}/>
-        <Calculations />
+        <Calculations store={props.store}/>
         <Formulas />
       </div>
     </div>

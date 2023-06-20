@@ -28,9 +28,22 @@ let store = {
                 { path: ["Sides", "2", "0"], value: "75", title: "Сторона c, градусы", type: "Number", key: "202", block: true },
                 { path: ["Sides", "2", "1"], value: "18", title: "Сторона c, минуты", type: "Number", key: "212", block: true },
                 { path: ["Sides", "2", "2"], value: "0", title: "Сторона c, секунды", type: "Number", key: "222", block: true }],
+        ],
+
+        Results: [
+            [
+                { word: "", degree: "", minute: "", second: "", letter: "" },
+            ],
+            [
+                { word: "", degree: "", minute: "", second: "", letter: "" }
+            ],
+            [
+                { word: "", degree: "", minute: "", second: "", letter: "" }
+            ],
         ]
     },
 
+    isHidden: true,
 
     getState() { return this._state },
 
@@ -41,7 +54,21 @@ let store = {
     },
 
     mainButton() {
-        if (this.checkboxCounter() === 3) { this.counts() } else { alert("Выберите три элемента треугольника для расчётов") }
+        if (this.checkboxCounter() === 3) { this.counts() } else { return alert("Выберите три элемента треугольника для расчётов") }
+        this.isHidden = false
+    },
+
+    counts() {
+        if (this._state.Angles[0][0].block === false && this._state.Angles[1][0].block === false && this._state.Angles[2][0].block === false) { this.threeAngles() }
+        if (this._state.Sides[0][0].block === false && this._state.Sides[1][0].block === false && this._state.Sides[2][0].block === false) { this.threeSides() }
+
+        if (this._state.Sides[0][0].block === false && this._state.Angles[1][0].block === false && this._state.Angles[2][0].block === false) { this.sidePlusTwoAngles(0) }
+        if (this._state.Angles[0][0].block === false && this._state.Sides[1][0].block === false && this._state.Angles[2][0].block === false) { this.sidePlusTwoAngles(1) }
+        if (this._state.Angles[0][0].block === false && this._state.Angles[1][0].block === false && this._state.Sides[2][0].block === false) { this.sidePlusTwoAngles(2) }
+
+        if (this._state.Angles[0][0].block === false && this._state.Sides[1][0].block === false && this._state.Sides[2][0].block === false) { this.anglePlusTwoSides(0) }
+        if (this._state.Sides[0][0].block === false && this._state.Angles[1][0].block === false && this._state.Sides[2][0].block === false) { this.anglePlusTwoSides(1) }
+        if (this._state.Sides[0][0].block === false && this._state.Sides[1][0].block === false && this._state.Angles[2][0].block === false) { this.anglePlusTwoSides(2) }
     },
 
     checkboxCounter(props) {
@@ -55,19 +82,34 @@ let store = {
         return checkboxCounter;
     },
 
+    putResults(props) {
+        debugger
+        console.log(props)
+        this._state.Results[0][0].word = props[3][0]
+        this._state.Results[0][0].degree = props[0][0]
+        this._state.Results[0][0].minute = props[0][1]
+        this._state.Results[0][0].second = props[0][2]
+        this._state.Results[0][0].letter = props[4][0]
+
+        this._state.Results[1][0].word = props[3][1]
+        this._state.Results[1][0].degree = props[1][0]
+        this._state.Results[1][0].minute = props[1][1]
+        this._state.Results[1][0].second = props[1][2]
+        this._state.Results[1][0].letter = props[4][1]
+
+        this._state.Results[2][0].word = props[3][2]
+        this._state.Results[2][0].degree = props[2][0]
+        this._state.Results[2][0].minute = props[2][1]
+        this._state.Results[2][0].second = props[2][2]
+        this._state.Results[2][0].letter = props[4][2]
+
+        this.container()
+    },
+
     changeNumber(newValue, path) {
         this._state[path[0]][path[1]][path[2]].value = newValue;
         this.container();
-    },
-
-    counts() {
-        if (this._state.Angles[0][0].block === false && this._state.Angles[1][0].block === false && this._state.Angles[2][0].block === false) { this.threeAngles() }
-        if (this._state.Sides[0][0].block === false && this._state.Sides[1][0].block === false && this._state.Sides[2][0].block === false) { this.threeSides() }
-        if (this._state.Sides[0][0].block === false && this._state.Angles[1][0].block === false && this._state.Angles[2][0].block === false) { this.sidePlusTwoAngles(0) }
-        if (this._state.Angles[0][0].block === false && this._state.Sides[1][0].block === false && this._state.Angles[2][0].block === false) { this.sidePlusTwoAngles(1) }
-        if (this._state.Angles[0][0].block === false && this._state.Angles[1][0].block === false && this._state.Sides[2][0].block === false) { this.sidePlusTwoAngles(2) }
-        else {alert("Not OK")}
-    },
+    },   
 
     radians(itemPathOne, itemPathTwo, itemPathThree) {
         return (Number(this._state[itemPathOne[0]][itemPathOne[1]][itemPathOne[2]].value) +
@@ -80,7 +122,7 @@ let store = {
         const degree = Math.trunc(degrees);
         const minute = Math.trunc((degrees - degree) * 60);
         const second = (((degrees - degree) * 60) - minute) * 60;
-        return ([degree + " градусов, " + minute + " минут, " + second + " секунд. "]);
+        return ([degree, minute, second]);
     },
 
     threeSides() {
@@ -91,7 +133,11 @@ let store = {
         let cosAngleOne = (Math.cos(sideOneRad) - (Math.cos(sideTwoRad) * Math.cos(sideThreeRad))) / (Math.sin(sideTwoRad) * Math.sin(sideThreeRad));
         let cosAngleTwo = (Math.cos(sideTwoRad) - (Math.cos(sideThreeRad) * Math.cos(sideOneRad))) / (Math.sin(sideThreeRad) * Math.sin(sideOneRad));
         let cosAngleThree = (Math.cos(sideThreeRad) - (Math.cos(sideOneRad) * Math.cos(sideTwoRad))) / (Math.sin(sideOneRad) * Math.sin(sideTwoRad));
-        alert(this.degrees(Math.acos(cosAngleOne)) + this.degrees(Math.acos(cosAngleTwo)) + this.degrees(Math.acos(cosAngleThree)));
+
+        const word = ["Угол", "Угол", "Угол"]
+        const letter = ["A", "B", "C"]
+
+        this.putResults([this.degrees(Math.acos(cosAngleOne)), this.degrees(Math.acos(cosAngleTwo)), this.degrees(Math.acos(cosAngleThree)), word, letter])
     },
 
     threeAngles() {
@@ -102,11 +148,14 @@ let store = {
         let cosSideOne = (Math.cos(angleOneRad) + (Math.cos(angleTwoRad) * Math.cos(angleThreeRad))) / (Math.sin(angleTwoRad) * Math.sin(angleThreeRad));
         let cosSideTwo = (Math.cos(angleTwoRad) + (Math.cos(angleThreeRad) * Math.cos(angleOneRad))) / (Math.sin(angleThreeRad) * Math.sin(angleOneRad));
         let cosSideThree = (Math.cos(angleThreeRad) + (Math.cos(angleOneRad) * Math.cos(angleTwoRad))) / (Math.sin(angleOneRad) * Math.sin(angleTwoRad));
-        alert(this.degrees(Math.acos(cosSideOne)) + this.degrees(Math.acos(cosSideTwo)) + this.degrees(Math.acos(cosSideThree)));
+
+        const word = ["Сторона", "Сторона", "Сторона"]
+        const letter = ["A", "B", "C"]
+
+        this.putResults([this.degrees(Math.acos(cosSideOne)), this.degrees(Math.acos(cosSideTwo)), this.degrees(Math.acos(cosSideThree)), word, letter]);
     },
 
     sidePlusTwoAngles(props) {
-
         let sideOneRad = 0
         let angleTwoRad = 0
         let angleThreeRad = 0
@@ -133,19 +182,76 @@ let store = {
             default: break
         }
 
-
-
         let cosAngleOne = (Math.cos(angleTwoRad) * Math.cos(angleThreeRad) * (-1)) + (Math.sin(angleTwoRad) * Math.sin(angleThreeRad) * Math.cos(sideOneRad))
 
-        let sinTeorema = Math.sin(sideOneRad) / Math.sqrt(1 - cosAngleOne * cosAngleOne);
+        let sinTeorema = Math.sin(sideOneRad) / Math.sqrt(1 - cosAngleOne * cosAngleOne)
 
         let cosSideTwo = Math.sqrt(1 - ((Math.sin(angleTwoRad) * sinTeorema) * (Math.sin(angleTwoRad) * sinTeorema)));
         let cosSideThree = Math.sqrt(1 - ((Math.sin(angleThreeRad) * sinTeorema) * (Math.sin(angleThreeRad) * sinTeorema)));
-        alert(this.degrees(Math.acos(cosAngleOne)) + this.degrees(Math.acos(cosSideTwo)) + this.degrees(Math.acos(cosSideThree)));
+
+        const letter = (props) => {
+            switch (props) {
+                case 0: return ["A", "B", "C"]
+                case 1: return ["B", "C", "A"]
+                case 2: return ["C", "A", "B"]
+                default: break
+            }
+        }
+
+        const word = ["Угол", "Сторона", "Сторона"]
+
+        this.putResults([this.degrees(Math.acos(cosAngleOne)), this.degrees(Math.acos(cosSideTwo)), this.degrees(Math.acos(cosSideThree)), word, letter(props)]);
     },
 
-    switchBlock(props) {
+    anglePlusTwoSides(props) {
+        let angleOneRad = 0
+        let sideTwoRad = 0
+        let sideThreeRad = 0
+        switch (props) {
+            
+            case 0:
+                angleOneRad = this.radians(this._state.Angles[0][0].path, this._state.Angles[0][1].path, this._state.Angles[0][2].path)
+                sideTwoRad = this.radians(this._state.Sides[1][0].path, this._state.Sides[1][1].path, this._state.Sides[1][2].path)
+                sideThreeRad = this.radians(this._state.Sides[2][0].path, this._state.Sides[2][1].path, this._state.Sides[2][2].path)
+                break
+
+            case 1:
+                angleOneRad = this.radians(this._state.Angles[1][0].path, this._state.Angles[1][1].path, this._state.Angles[1][2].path)
+                sideTwoRad = this.radians(this._state.Sides[2][0].path, this._state.Sides[2][1].path, this._state.Sides[2][2].path)
+                sideThreeRad = this.radians(this._state.Sides[0][0].path, this._state.Sides[0][1].path, this._state.Sides[0][2].path)
+                break
+
+            case 2:
+                angleOneRad = this.radians(this._state.Angles[2][0].path, this._state.Angles[2][1].path, this._state.Angles[2][2].path)
+                sideTwoRad = this.radians(this._state.Sides[0][0].path, this._state.Sides[0][1].path, this._state.Sides[0][2].path)
+                sideThreeRad = this.radians(this._state.Sides[1][0].path, this._state.Sides[1][1].path, this._state.Sides[1][2].path)
+                break
+
+            default: break
+        }
+
+        let cosSideOne = (Math.cos(sideTwoRad) * Math.cos(sideThreeRad)) + (Math.sin(sideTwoRad) * Math.sin(sideThreeRad) * Math.cos(angleOneRad))
+
+        let sinTeorema = (Math.sqrt(1 - cosSideOne * cosSideOne)) / Math.sin(angleOneRad)
         debugger
+        let cosAngleTwo = Math.sqrt(1 - ((Math.sin(sideTwoRad) / sinTeorema) * (Math.sin(sideTwoRad) / sinTeorema)))
+        let cosAngleThree = Math.sqrt(1 - ((Math.sin(sideThreeRad) / sinTeorema) * (Math.sin(sideThreeRad) / sinTeorema)))
+        debugger
+
+        const letter = (props) => {
+            switch (props) {
+                case 0: return ["A", "B", "C"]
+                case 1: return ["B", "C", "A"]
+                case 2: return ["C", "A", "B"]
+                default: break
+            }
+        }
+
+        const word = ["Сторона", "Угол", "Угол"]
+
+        this.putResults([this.degrees(Math.acos(cosSideOne)), this.degrees(Math.acos(cosAngleTwo)), this.degrees(Math.acos(cosAngleThree)), word, letter(props)]);},
+
+    switchBlock(props) {
         this._state[props[0]][props[1]][props[2]].block === false ? this._state[props[0]][props[1]][props[2]].block = true : this._state[props[0]][props[1]][props[2]].block = false;
         this.container();
     }

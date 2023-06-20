@@ -16,7 +16,7 @@ const Entries = (props) => {
             <Sides store={props.store} />
             <Angles store={props.store} />
         </div>
-        <input title="Просто кнопка" type="button" defaultValue="Кнопка" onClick={onClickFunction} />
+        <input title="Просто кнопка" type="button" defaultValue="Рассчитать" onClick={onClickFunction} />
     </div>
 };
 

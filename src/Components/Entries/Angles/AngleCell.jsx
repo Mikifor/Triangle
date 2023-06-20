@@ -15,12 +15,16 @@ const CellItem = (props) => {
         type="number"
         value={props.value}
         path={props.path}
-        disabled={props.block}
-    />
+        disabled={props.block}/>
 }
 
 const AngleCell = (props) => {
-    return props.angle.map(cellItem => <CellItem title={cellItem.title} value={cellItem.value} path={cellItem.path} store={props.store} block={cellItem.block}/>)
+    return props.angle.map(cellItem => 
+    <CellItem title={cellItem.title} 
+    value={cellItem.value} 
+    path={cellItem.path} 
+    store={props.store} 
+    block={cellItem.block}/>)
 }
 
 const CheckBox = (props) => {

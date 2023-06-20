@@ -12,7 +12,6 @@ const rerenderDOM = () => {root.render(
     <App store={store}/>
   </React.StrictMode>
 )
-debugger;
 };
 
 rerenderDOM();
