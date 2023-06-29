@@ -7,7 +7,7 @@ const PrintCalculations = (props) => {
   const letter = props.store._state.Results[props.num][0].letter
   const minute = props.store._state.Results[props.num][0].minute
   const second = props.store._state.Results[props.num][0].second
-
+  
   return <div>{word} {letter}: {degree}° {minute}' {second}"  </div>;
 }
 

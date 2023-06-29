@@ -3,16 +3,16 @@ let store = {
         Angles: [
             [
                 { path: ["Angles", "0", "0"], value: "49", title: "Угол A, градусы", type: "Number", key: "100", block: true },
-                { path: ["Angles", "0", "1"], value: "39", title: "Угол A, минуты", type: "Number", key: "110", block: true },
-                { path: ["Angles", "0", "2"], value: "0", title: "Угол A, секунды", type: "Number", key: "120", block: true }],
+                { path: ["Angles", "0", "1"], value: "38", title: "Угол A, минуты", type: "Number", key: "110", block: true },
+                { path: ["Angles", "0", "2"], value: "56", title: "Угол A, секунды", type: "Number", key: "120", block: true }],
             [
                 { path: ["Angles", "1", "0"], value: "100", title: "Угол B, градусы", type: "Number", key: "101", block: true },
-                { path: ["Angles", "1", "1"], value: "51", title: "Угол B, минуты", type: "Number", key: "111", block: true },
-                { path: ["Angles", "1", "2"], value: "0", title: "Угол B, секунды", type: "Number", key: "121", block: true }],
+                { path: ["Angles", "1", "1"], value: "50", title: "Угол B, минуты", type: "Number", key: "111", block: true },
+                { path: ["Angles", "1", "2"], value: "59", title: "Угол B, секунды", type: "Number", key: "121", block: true }],
             [
                 { path: ["Angles", "2", "0"], value: "71", title: "Угол C, градусы", type: "Number", key: "102", block: true },
                 { path: ["Angles", "2", "1"], value: "49", title: "Угол C, минуты", type: "Number", key: "112", block: true },
-                { path: ["Angles", "2", "2"], value: "48", title: "Угол C, секунды", type: "Number", key: "122", block: true }],
+                { path: ["Angles", "2", "2"], value: "54", title: "Угол C, секунды", type: "Number", key: "122", block: true }],
         ],
 
         Sides: [
@@ -55,7 +55,7 @@ let store = {
 
     mainButton() {
         if (this.checkboxCounter() === 3) { this.counts() } else { return alert("Выберите три элемента треугольника для расчётов") }
-        this.isHidden = false
+
     },
 
     counts() {
@@ -69,6 +69,12 @@ let store = {
         if (this._state.Angles[0][0].block === false && this._state.Sides[1][0].block === false && this._state.Sides[2][0].block === false) { this.anglePlusTwoSides(0) }
         if (this._state.Sides[0][0].block === false && this._state.Angles[1][0].block === false && this._state.Sides[2][0].block === false) { this.anglePlusTwoSides(1) }
         if (this._state.Sides[0][0].block === false && this._state.Sides[1][0].block === false && this._state.Angles[2][0].block === false) { this.anglePlusTwoSides(2) }
+
+        if (this._state.Angles[0][0].block === false && this._state.Sides[0][0].block === false) { return alert("Ошибка") }
+        if (this._state.Angles[1][0].block === false && this._state.Sides[1][0].block === false) { return alert("Ошибка") }
+        if (this._state.Angles[2][0].block === false && this._state.Sides[2][0].block === false) { return alert("Ошибка") }
+
+        this.isHidden = false
     },
 
     checkboxCounter(props) {
@@ -109,7 +115,7 @@ let store = {
     changeNumber(newValue, path) {
         this._state[path[0]][path[1]][path[2]].value = newValue;
         this.container();
-    },   
+    },
 
     radians(itemPathOne, itemPathTwo, itemPathThree) {
         return (Number(this._state[itemPathOne[0]][itemPathOne[1]][itemPathOne[2]].value) +
@@ -126,6 +132,7 @@ let store = {
     },
 
     threeSides() {
+        debugger
         let sideOneRad = this.radians(this._state.Sides[0][0].path, this._state.Sides[0][1].path, this._state.Sides[0][2].path);
         let sideTwoRad = this.radians(this._state.Sides[1][0].path, this._state.Sides[1][1].path, this._state.Sides[1][2].path);
         let sideThreeRad = this.radians(this._state.Sides[2][0].path, this._state.Sides[2][1].path, this._state.Sides[2][2].path);
@@ -204,11 +211,15 @@ let store = {
     },
 
     anglePlusTwoSides(props) {
+        debugger
         let angleOneRad = 0
+        let tanAngleTwo = 0
+        let tanAngleThree = 0
+        let cosSideOne = 0
         let sideTwoRad = 0
         let sideThreeRad = 0
         switch (props) {
-            
+
             case 0:
                 angleOneRad = this.radians(this._state.Angles[0][0].path, this._state.Angles[0][1].path, this._state.Angles[0][2].path)
                 sideTwoRad = this.radians(this._state.Sides[1][0].path, this._state.Sides[1][1].path, this._state.Sides[1][2].path)
@@ -217,45 +228,50 @@ let store = {
 
             case 1:
                 angleOneRad = this.radians(this._state.Angles[1][0].path, this._state.Angles[1][1].path, this._state.Angles[1][2].path)
-                sideTwoRad = this.radians(this._state.Sides[2][0].path, this._state.Sides[2][1].path, this._state.Sides[2][2].path)
-                sideThreeRad = this.radians(this._state.Sides[0][0].path, this._state.Sides[0][1].path, this._state.Sides[0][2].path)
+                sideTwoRad = this.radians(this._state.Sides[0][0].path, this._state.Sides[0][1].path, this._state.Sides[0][2].path)
+                sideThreeRad = this.radians(this._state.Sides[2][0].path, this._state.Sides[2][1].path, this._state.Sides[2][2].path)
                 break
 
             case 2:
                 angleOneRad = this.radians(this._state.Angles[2][0].path, this._state.Angles[2][1].path, this._state.Angles[2][2].path)
-                sideTwoRad = this.radians(this._state.Sides[0][0].path, this._state.Sides[0][1].path, this._state.Sides[0][2].path)
-                sideThreeRad = this.radians(this._state.Sides[1][0].path, this._state.Sides[1][1].path, this._state.Sides[1][2].path)
+                sideTwoRad = this.radians(this._state.Sides[1][0].path, this._state.Sides[1][1].path, this._state.Sides[1][2].path)
+                sideThreeRad = this.radians(this._state.Sides[0][0].path, this._state.Sides[0][1].path, this._state.Sides[0][2].path)
                 break
 
             default: break
         }
 
-        let cosSideOne = (Math.cos(sideTwoRad) * Math.cos(sideThreeRad)) + (Math.sin(sideTwoRad) * Math.sin(sideThreeRad) * Math.cos(angleOneRad))
+        tanAngleThree = Math.sin(angleOneRad) / ((Math.sin(sideTwoRad) / Math.tan(sideThreeRad)) - Math.cos(angleOneRad) * Math.cos(sideTwoRad))
+        if (tanAngleThree < 0) { tanAngleThree = (Math.atan(tanAngleThree) + Math.PI) }
 
-        let sinTeorema = (Math.sqrt(1 - cosSideOne * cosSideOne)) / Math.sin(angleOneRad)
-        debugger
-        let cosAngleTwo = Math.sqrt(1 - ((Math.sin(sideTwoRad) / sinTeorema) * (Math.sin(sideTwoRad) / sinTeorema)))
-        let cosAngleThree = Math.sqrt(1 - ((Math.sin(sideThreeRad) / sinTeorema) * (Math.sin(sideThreeRad) / sinTeorema)))
-        debugger
+        cosSideOne = (Math.cos(sideTwoRad) * Math.cos(sideThreeRad)) + (Math.sin(sideTwoRad) * Math.sin(sideThreeRad) * Math.cos(angleOneRad))
+        let sideOneRad = Math.acos(cosSideOne)
+
+
+        let angleThreeRad = Math.atan(tanAngleThree)
+
+        tanAngleTwo = Math.sin(angleThreeRad) / ((Math.sin(sideOneRad) / Math.tan(sideTwoRad)) - Math.cos(angleThreeRad) * Math.cos(sideOneRad))
+        if ((tanAngleTwo) < 0) { tanAngleTwo = (Math.atan(tanAngleTwo) + Math.PI) }
+        else tanAngleTwo = Math.atan(tanAngleTwo)
 
         const letter = (props) => {
             switch (props) {
                 case 0: return ["A", "B", "C"]
-                case 1: return ["B", "C", "A"]
-                case 2: return ["C", "A", "B"]
+                case 1: return ["B", "A", "C"]
+                case 2: return ["C", "B", "A"]
                 default: break
             }
         }
 
         const word = ["Сторона", "Угол", "Угол"]
 
-        this.putResults([this.degrees(Math.acos(cosSideOne)), this.degrees(Math.acos(cosAngleTwo)), this.degrees(Math.acos(cosAngleThree)), word, letter(props)]);},
+        this.putResults([this.degrees(Math.acos(cosSideOne)), this.degrees(tanAngleTwo), this.degrees(Math.atan(tanAngleThree)), word, letter(props)])
+    },
 
     switchBlock(props) {
         this._state[props[0]][props[1]][props[2]].block === false ? this._state[props[0]][props[1]][props[2]].block = true : this._state[props[0]][props[1]][props[2]].block = false;
         this.container();
     }
 }
-
 
 export default store;
