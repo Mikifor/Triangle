@@ -2,30 +2,30 @@ let store = {
     _state: {
         Angles: [
             [
-                { path: ["Angles", "0", "0"], value: "0", title: "Угол A, градусы", type: "Number", key: "100", block: true },
+                { path: ["Angles", "0", "0"], value: "90", title: "Угол A, градусы", type: "Number", key: "100", block: true },
                 { path: ["Angles", "0", "1"], value: "0", title: "Угол A, минуты", type: "Number", key: "110", block: true },
                 { path: ["Angles", "0", "2"], value: "0", title: "Угол A, секунды", type: "Number", key: "120", block: true }],
             [
-                { path: ["Angles", "1", "0"], value: "0", title: "Угол B, градусы", type: "Number", key: "101", block: true },
+                { path: ["Angles", "1", "0"], value: "90", title: "Угол B, градусы", type: "Number", key: "101", block: true },
                 { path: ["Angles", "1", "1"], value: "0", title: "Угол B, минуты", type: "Number", key: "111", block: true },
                 { path: ["Angles", "1", "2"], value: "0", title: "Угол B, секунды", type: "Number", key: "121", block: true }],
             [
-                { path: ["Angles", "2", "0"], value: "0", title: "Угол C, градусы", type: "Number", key: "102", block: true },
+                { path: ["Angles", "2", "0"], value: "90", title: "Угол C, градусы", type: "Number", key: "102", block: true },
                 { path: ["Angles", "2", "1"], value: "0", title: "Угол C, минуты", type: "Number", key: "112", block: true },
                 { path: ["Angles", "2", "2"], value: "0", title: "Угол C, секунды", type: "Number", key: "122", block: true }],
         ],
 
         Sides: [
             [
-                { path: ["Sides", "0", "0"], value: "0", title: "Сторона a, градусы", type: "Number", key: "200", block: true },
+                { path: ["Sides", "0", "0"], value: "90", title: "Сторона a, градусы", type: "Number", key: "200", block: true },
                 { path: ["Sides", "0", "1"], value: "0", title: "Сторона a, минуты", type: "Number", key: "210", block: true },
                 { path: ["Sides", "0", "2"], value: "0", title: "Сторона a, секунды", type: "Number", key: "220", block: true }],
             [
-                { path: ["Sides", "1", "0"], value: "0", title: "Сторона b, градусы", type: "Number", key: "201", block: true },
+                { path: ["Sides", "1", "0"], value: "90", title: "Сторона b, градусы", type: "Number", key: "201", block: true },
                 { path: ["Sides", "1", "1"], value: "0", title: "Сторона b, минуты", type: "Number", key: "211", block: true },
                 { path: ["Sides", "1", "2"], value: "0", title: "Сторона b, секунды", type: "Number", key: "221", block: true }],
             [
-                { path: ["Sides", "2", "0"], value: "0", title: "Сторона c, градусы", type: "Number", key: "202", block: true },
+                { path: ["Sides", "2", "0"], value: "90", title: "Сторона c, градусы", type: "Number", key: "202", block: true },
                 { path: ["Sides", "2", "1"], value: "0", title: "Сторона c, минуты", type: "Number", key: "212", block: true },
                 { path: ["Sides", "2", "2"], value: "0", title: "Сторона c, секунды", type: "Number", key: "222", block: true }],
         ],
