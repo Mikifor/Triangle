@@ -89,8 +89,6 @@ let store = {
     },
 
     putResults(props) {
-
-        console.log(props)
         this._state.Results[0][0].word = props[3][0]
         this._state.Results[0][0].degree = props[0][0]
         this._state.Results[0][0].minute = props[0][1]
@@ -137,7 +135,6 @@ let store = {
     },
 
     threeSides() {
-        debugger
         let sideOneRad = this.radians(this.degreeInFraction(this._state.Sides[0][0].path, this._state.Sides[0][1].path, this._state.Sides[0][2].path));
         let sideTwoRad = this.radians(this.degreeInFraction(this._state.Sides[1][0].path, this._state.Sides[1][1].path, this._state.Sides[1][2].path));
         let sideThreeRad = this.radians(this.degreeInFraction(this._state.Sides[2][0].path, this._state.Sides[2][1].path, this._state.Sides[2][2].path));
@@ -153,7 +150,6 @@ let store = {
     },
 
     threeAngles() {
-        debugger
         let angleOneRad = this.radians(this.degreeInFraction(this._state.Angles[0][0].path, this._state.Angles[0][1].path, this._state.Angles[0][2].path));
         let angleTwoRad = this.radians(this.degreeInFraction(this._state.Angles[1][0].path, this._state.Angles[1][1].path, this._state.Angles[1][2].path));
         let angleThreeRad = this.radians(this.degreeInFraction(this._state.Angles[2][0].path, this._state.Angles[2][1].path, this._state.Angles[2][2].path));
@@ -196,11 +192,9 @@ let store = {
             default: break
         }
 
-
         let tanHalfSum = 0
         let tanHalfDif = 0
 
-        debugger
         if (angleTwoFraction > angleThreeFraction) {
             tanHalfSum = Math.cos(this.radians((angleTwoFraction - angleThreeFraction) / 2)) / Math.cos(this.radians((angleTwoFraction + angleThreeFraction) / 2)) * Math.tan(this.radians(sideOneFraction / 2))
             tanHalfDif = Math.sin(this.radians((angleTwoFraction - angleThreeFraction) / 2)) / Math.sin(this.radians((angleTwoFraction + angleThreeFraction) / 2)) * Math.tan(this.radians(sideOneFraction / 2))
