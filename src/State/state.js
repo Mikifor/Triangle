@@ -2,32 +2,32 @@ let store = {
     _state: {
         Angles: [
             [
-                { path: ["Angles", "0", "0"], value: "137", title: "Угол A, градусы", type: "Number", key: "100", block: true },
-                { path: ["Angles", "0", "1"], value: "40", title: "Угол A, минуты", type: "Number", key: "110", block: true },
-                { path: ["Angles", "0", "2"], value: "12", title: "Угол A, секунды", type: "Number", key: "120", block: true }],
+                { path: ["Angles", "0", "0"], value: "0", title: "Угол A, градусы", type: "Number", key: "100", block: true },
+                { path: ["Angles", "0", "1"], value: "0", title: "Угол A, минуты", type: "Number", key: "110", block: true },
+                { path: ["Angles", "0", "2"], value: "0", title: "Угол A, секунды", type: "Number", key: "120", block: true }],
             [
-                { path: ["Angles", "1", "0"], value: "114", title: "Угол B, градусы", type: "Number", key: "101", block: true },
-                { path: ["Angles", "1", "1"], value: "45", title: "Угол B, минуты", type: "Number", key: "111", block: true },
-                { path: ["Angles", "1", "2"], value: "36", title: "Угол B, секунды", type: "Number", key: "121", block: true }],
+                { path: ["Angles", "1", "0"], value: "0", title: "Угол B, градусы", type: "Number", key: "101", block: true },
+                { path: ["Angles", "1", "1"], value: "0", title: "Угол B, минуты", type: "Number", key: "111", block: true },
+                { path: ["Angles", "1", "2"], value: "0", title: "Угол B, секунды", type: "Number", key: "121", block: true }],
             [
-                { path: ["Angles", "2", "0"], value: "106", title: "Угол C, градусы", type: "Number", key: "102", block: true },
-                { path: ["Angles", "2", "1"], value: "15", title: "Угол C, минуты", type: "Number", key: "112", block: true },
-                { path: ["Angles", "2", "2"], value: "36", title: "Угол C, секунды", type: "Number", key: "122", block: true }],
+                { path: ["Angles", "2", "0"], value: "0", title: "Угол C, градусы", type: "Number", key: "102", block: true },
+                { path: ["Angles", "2", "1"], value: "0", title: "Угол C, минуты", type: "Number", key: "112", block: true },
+                { path: ["Angles", "2", "2"], value: "0", title: "Угол C, секунды", type: "Number", key: "122", block: true }],
         ],
 
         Sides: [
             [
-                { path: ["Sides", "0", "0"], value: "135", title: "Сторона a, градусы", type: "Number", key: "200", block: true },
-                { path: ["Sides", "0", "1"], value: "31", title: "Сторона a, минуты", type: "Number", key: "210", block: true },
-                { path: ["Sides", "0", "2"], value: "12", title: "Сторона a, секунды", type: "Number", key: "220", block: true }],
+                { path: ["Sides", "0", "0"], value: "0", title: "Сторона a, градусы", type: "Number", key: "200", block: true },
+                { path: ["Sides", "0", "1"], value: "0", title: "Сторона a, минуты", type: "Number", key: "210", block: true },
+                { path: ["Sides", "0", "2"], value: "0", title: "Сторона a, секунды", type: "Number", key: "220", block: true }],
             [
-                { path: ["Sides", "1", "0"], value: "109", title: "Сторона b, градусы", type: "Number", key: "201", block: true },
-                { path: ["Sides", "1", "1"], value: "7", title: "Сторона b, минуты", type: "Number", key: "211", block: true },
-                { path: ["Sides", "1", "2"], value: "48", title: "Сторона b, секунды", type: "Number", key: "221", block: true }],
+                { path: ["Sides", "1", "0"], value: "0", title: "Сторона b, градусы", type: "Number", key: "201", block: true },
+                { path: ["Sides", "1", "1"], value: "0", title: "Сторона b, минуты", type: "Number", key: "211", block: true },
+                { path: ["Sides", "1", "2"], value: "0", title: "Сторона b, секунды", type: "Number", key: "221", block: true }],
             [
-                { path: ["Sides", "2", "0"], value: "87", title: "Сторона c, градусы", type: "Number", key: "202", block: true },
-                { path: ["Sides", "2", "1"], value: "13", title: "Сторона c, минуты", type: "Number", key: "212", block: true },
-                { path: ["Sides", "2", "2"], value: "48", title: "Сторона c, секунды", type: "Number", key: "222", block: true }],
+                { path: ["Sides", "2", "0"], value: "0", title: "Сторона c, градусы", type: "Number", key: "202", block: true },
+                { path: ["Sides", "2", "1"], value: "0", title: "Сторона c, минуты", type: "Number", key: "212", block: true },
+                { path: ["Sides", "2", "2"], value: "0", title: "Сторона c, секунды", type: "Number", key: "222", block: true }],
         ],
 
         Results: [
@@ -169,7 +169,7 @@ let store = {
     },
 
     sidePlusTwoAngles(props) {
-        debugger
+
         let sideOneFraction = 0
         let angleTwoFraction = 0
         let angleThreeFraction = 0
@@ -199,6 +199,8 @@ let store = {
 
         let tanHalfSum = 0
         let tanHalfDif = 0
+
+        debugger
         if (angleTwoFraction > angleThreeFraction) {
             tanHalfSum = Math.cos(this.radians((angleTwoFraction - angleThreeFraction) / 2)) / Math.cos(this.radians((angleTwoFraction + angleThreeFraction) / 2)) * Math.tan(this.radians(sideOneFraction / 2))
             tanHalfDif = Math.sin(this.radians((angleTwoFraction - angleThreeFraction) / 2)) / Math.sin(this.radians((angleTwoFraction + angleThreeFraction) / 2)) * Math.tan(this.radians(sideOneFraction / 2))
@@ -206,22 +208,29 @@ let store = {
             tanHalfSum = Math.cos(this.radians((angleThreeFraction - angleTwoFraction) / 2)) / Math.cos(this.radians((angleTwoFraction + angleThreeFraction) / 2)) * Math.tan(this.radians(sideOneFraction / 2))
             tanHalfDif = Math.sin(this.radians((angleThreeFraction - angleTwoFraction) / 2)) / Math.sin(this.radians((angleTwoFraction + angleThreeFraction) / 2)) * Math.tan(this.radians(sideOneFraction / 2))
         }
+
         if (tanHalfSum < 0) { tanHalfSum = (Math.PI + Math.atan(tanHalfSum)) }
         else tanHalfSum = Math.atan(tanHalfSum)
 
-
-        if (tanHalfDif < 0) { tanHalfDif = (Math.PI + Math.atan(tanHalfDif)) }
+        if (tanHalfSum < 0) { tanHalfDif = (Math.PI - Math.atan(tanHalfDif)) }
         else tanHalfDif = Math.atan(tanHalfDif)
 
-        let sideTwoRad = (tanHalfSum + tanHalfDif)
-        let sideThreeRad = (tanHalfSum - tanHalfDif)
+        let sideTwoRad = 0
+        let sideThreeRad = 0
+        if (angleTwoFraction > angleThreeFraction) {
+            sideTwoRad = (tanHalfSum + tanHalfDif)
+            sideThreeRad = (tanHalfSum - tanHalfDif)
+        }
+        else {sideTwoRad = (tanHalfSum - tanHalfDif)
+            sideThreeRad = (tanHalfSum + tanHalfDif)}
+
 
         let cosAngleOne = (Math.cos(this.radians(angleTwoFraction)) * (-1)) * Math.cos(this.radians(angleThreeFraction)) + Math.sin(this.radians(angleTwoFraction)) * Math.sin(this.radians(angleThreeFraction)) * Math.cos(this.radians(sideOneFraction))
 
         const letter = (props) => {
             switch (props) {
                 case 0: return ["A", "B", "C"]
-                case 1: return ["B", "A", "C"]
+                case 1: return ["B", "C", "A"]
                 case 2: return ["C", "A", "B"]
                 default: break
             }
